@@ -11,10 +11,6 @@ def reader():
     print("Chip vorhalten:")
     try:
         rfid, text = mfrc.read()
-    except KeyboardInterrupt:
-        raise
-        return 0
-    finally:
         return rfid
 
 
@@ -23,11 +19,6 @@ def writer(text):
         mfrc.write(text)
         print("Chip registriert!")
         sleep(1)
-    except Exception as error:
-        GPIO.cleanup()
-        print(error)
-    finally:
-        return rfid
 
 
 green_led = 3
