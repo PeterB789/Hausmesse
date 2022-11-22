@@ -42,13 +42,18 @@ def open_door(authorized):
     else:
         # debug:
         print("Zugang verweigert!")
+        sleep(2)
 
 
 if __name__ == "__main__":
+    run = 1
     try:
-        while True:
-            clear_console()
-            open_door(db_module.db_check(reader()))
+        try:
+            while run = 1:
+                clear_console()
+                open_door(db_module.db_check(reader()))
+        except KeyboardInterupt:
+
     except Exception as error:
         print(error)
     finally:
