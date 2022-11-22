@@ -13,7 +13,7 @@ def reader():
         rfid, text = mfrc.read()
     except KeyboardInterrupt:
         GPIO.cleanup()
-        break
+        exit(0)
     finally:
         GPIO.cleanup()
         return rfid
