@@ -48,8 +48,7 @@ if __name__ == "__main__":
     while True:
         try:
             #clear_console()
-            rfid = reader()
-            open_door(db_module.db_check(rfid))
+            open_door(db_module.db_check(reader()))
         except Exception as error:
             print(error)
         finally:
