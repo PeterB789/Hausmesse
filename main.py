@@ -49,11 +49,12 @@ if __name__ == "__main__":
     run = 1
     try:
         try:
-            while run = 1:
+            while run == 1:
                 clear_console()
                 open_door(db_module.db_check(reader()))
         except KeyboardInterupt:
-
+            run = 2
+            raise
     except Exception as error:
         print(error)
     finally:
