@@ -54,7 +54,5 @@ if __name__ == "__main__":
             clear_console()
             rfid = reader()
             open_door(db_module.db_check(rfid))
-        except KeyboardInterrupt:
-            exit(0)
         except Exception as error:
             print(error)
