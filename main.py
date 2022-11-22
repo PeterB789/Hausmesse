@@ -25,9 +25,8 @@ def writer(text):
         GPIO.cleanup()
 
 
-GPIO.setmode(GPIO.BCM)
-green_led = 2
-relais = 3
+green_led = 3
+relais = 5
 GPIO.setup(green_led, GPIO.OUT)
 GPIO.setup(relais, GPIO.OUT)
 
@@ -35,8 +34,8 @@ GPIO.setup(relais, GPIO.OUT)
 def open_door(authorized):
     if authorized:
         print("Sesam öffne dich!")
-        # GPIO.output(green_led, True)
-        # GPIO.output(relais, True)
+        GPIO.output(green_led, True)
+        GPIO.output(relais, True)
         sleep(3)
         # GPIO.output(green_led, False)
         # GPIO.output(relais, False)
