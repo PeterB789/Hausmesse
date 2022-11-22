@@ -12,10 +12,9 @@ def reader():
     try:
         rfid, text = mfrc.read()
     except KeyboardInterrupt:
-        GPIO.cleanup()
+        raise
         return 0
     finally:
-        GPIO.cleanup()
         return rfid
 
 
@@ -24,8 +23,11 @@ def writer(text):
         mfrc.write(text)
         print("Chip registriert!")
         sleep(1)
-    finally:
+    except Exception as error:
         GPIO.cleanup()
+        print(error)
+    finally:
+        return rfid
 
 
 green_led = 3
@@ -44,8 +46,6 @@ def open_door(authorized):
         GPIO.output(relais, False)
         # relais schalten + grüne LED
         # debug:
-        GPIO.cleanup()
-
     else:
         # debug:
         print("Zugang verweigert!")
@@ -57,7 +57,6 @@ if __name__ == "__main__":
             clear_console()
             rfid = reader()
             open_door(db_module.db_check(rfid))
-            GPIO.cleanup()
         except Exception as error:
             GPIO.cleanup()
             print(error)
