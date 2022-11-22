@@ -70,6 +70,10 @@ def config():
                 return 0
         except KeyboardInterrupt:
             return 0
+        except Exception as error:
+            print(error)
+            sleep(2)
+            return 0
     elif x == "2":
         try:
             clear_console()
@@ -78,6 +82,10 @@ def config():
             db_module.db_delete_user(f'{userid}')
             return 0
         except KeyboardInterrupt:
+            return 0
+        except Exception as error:
+            print(error)
+            sleep(2)
             return 0
     elif x == "3":
         try:
@@ -88,14 +96,18 @@ def config():
             return 0
         except KeyboardInterrupt:
             return 0
+        except Exception as error:
+            print(error)
+            sleep(2)
+            return 0
     elif x == "4":
         clear_console()
         print("### Chip auslesen ###\n")
         try:
             rfid = reader()
-        except:
-            print("\nCanceled or reader offline")
-            sleep(1)
+        except Exception as error:
+            print(error)
+            sleep(2)
             return 0
         try:
             userid = db_module.db_get_user_id(rfid)
@@ -104,7 +116,7 @@ def config():
         if db_module.db_userid_check(userid):
             print("ChipID: ", rfid, "\nUsername:", db_module.db_get_username(userid))
         else:
-            print("ChipID:", rfid, "Unregistered")
+            print("ChipID:", rfid, " not registered")
         input("\nPress Enter to continue:")
         return 0
     elif x == "5":
@@ -121,6 +133,10 @@ def config():
             return 0
         except KeyboardInterrupt:
             return 0
+        except Exception as error:
+            print(error)
+            sleep(2)
+            return 0
     elif x == "6":
         try:
             clear_console()
@@ -134,7 +150,12 @@ def config():
                 logid, timestamp, name = row
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
             input("\nPress Enter to continue:")
+            return 0
         except KeyboardInterrupt:
+            return 0
+        except Exception as error:
+            print(error)
+            sleep(2)
             return 0
     elif x == "7":
         clear_console()
