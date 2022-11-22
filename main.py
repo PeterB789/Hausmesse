@@ -47,7 +47,7 @@ def open_door(authorized):
 if __name__ == "__main__":
     while True:
         try:
-            clear_console()
+            #clear_console()
             rfid = reader()
             open_door(db_module.db_check(rfid))
         except Exception as error:
