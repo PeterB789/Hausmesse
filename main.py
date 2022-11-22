@@ -13,7 +13,7 @@ def reader():
         rfid, text = mfrc.read()
     except KeyboardInterrupt:
         GPIO.cleanup()
-        exit(0)
+        return 0
     finally:
         GPIO.cleanup()
         return rfid
@@ -37,14 +37,14 @@ GPIO.setup(relais, GPIO.OUT)
 def open_door(authorized):
     if authorized:
         print("Sesam öffne dich!")
-        GPIO.output(green_led, True)
-        GPIO.output(relais, True)
+        #GPIO.output(green_led, True)
+        #GPIO.output(relais, True)
         sleep(3)
         # GPIO.output(green_led, False)
-        # GPIO.output(relais, False)
+        #GPIO.output(relais, False)
         # relais schalten + grüne LED
         # debug:
-        # GPIO.cleanup()
+        #GPIO.cleanup()
 
     else:
         # debug:
