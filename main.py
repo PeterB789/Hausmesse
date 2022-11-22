@@ -70,7 +70,7 @@ def config():
         except KeyboardInterrupt:
             return 0
         except:
-            print("\nDatenbank-Probleme")
+            print("\nCanceled or database-issues")
             sleep(1)
             return 0
     elif x == "2":
@@ -82,7 +82,7 @@ def config():
         except KeyboardInterrupt:
             return 0
         except:
-            print("\nDatenbank-Probleme")
+            print("\nCanceled or database-issues")
             sleep(1)
             return 0
     elif x == "3":
