@@ -45,12 +45,12 @@ def open_door(authorized):
 
 
 if __name__ == "__main__":
-    while True:
-        try:
+    try:
+        while True:
             #clear_console()
             open_door(db_module.db_check(reader()))
-        except Exception as error:
-            print(error)
-        finally:
-            GPIO.cleanup()
-            exit(0)
+    except Exception as error:
+        print(error)
+    finally:
+        GPIO.cleanup()
+        exit(0)
