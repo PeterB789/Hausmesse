@@ -8,7 +8,7 @@ mfrc = SimpleMFRC522()
 
 
 def reader():
-    print("Chip vorhalten:")
+    print("Scan RFID-Chip:")
     rfid, text = mfrc.read()
     return rfid
 
@@ -29,7 +29,7 @@ GPIO.setup(relais, GPIO.OUT)
 
 def open_door(authorized):
     if authorized:
-        print("Sesam öffne dich!")
+        print("Door open")
         GPIO.output(green_led, True)
         GPIO.output(relais, True)
         sleep(3)
@@ -39,7 +39,7 @@ def open_door(authorized):
         # debug:
     else:
         # debug:
-        print("Zugang verweigert!")
+        print("Access denied")
         sleep(2)
 
 def config():
@@ -188,7 +188,7 @@ if __name__ == "__main__":
             try:
                 while run == True:
                     clear_console()
-                    print("### RFID-Module ###\n\nCtrl-c for config-mode\n")
+                    print("### RFID-Reader module ###\n\nctrl-c for config-mode\n")
                     open_door(db_module.db_check(reader()))
                 while run == False:
                     run = config()
