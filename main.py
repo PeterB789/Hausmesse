@@ -67,6 +67,7 @@ def config():
                 rfid = int(reader())
                 if db_module.db_add_user(user_name,rfid):
                     break
+                return 0
         except KeyboardInterrupt:
             return 0
     elif x == "2":
@@ -75,6 +76,7 @@ def config():
             print("### User löschen ###\n(logs werden auch gelöscht)\n")
             userid = input("Bitte \"User-ID\" eingeben: ")
             db_module.db_delete_user(f'{userid}')
+            return 0
         except KeyboardInterrupt:
             return 0
     elif x == "3":
@@ -83,6 +85,7 @@ def config():
             print("### User de-/aktivieren ###\n")
             userid = input("Bitte \"User-ID\" eingeben: ")
             db_module.db_de_or_activate_user(f'{userid}')
+            return 0
         except KeyboardInterrupt:
             return 0
     elif x == "4":
@@ -103,6 +106,7 @@ def config():
         else:
             print("ChipID:", rfid, "Unregistered")
         input("\nPress Enter to continue:")
+        return 0
     elif x == "5":
         try:
             clear_console()
@@ -113,7 +117,8 @@ def config():
             for row in result:
                 userid, rfid, name, aktiv = row
                 print("{:<10}{:<15}{:<25}{:^10}".format(userid, rfid, name, aktiv))
-            input("\nPress ctrl-c to continue:")
+            input("\nPress Enter to continue:")
+            return 0
         except KeyboardInterrupt:
             return 0
     elif x == "6":
@@ -128,7 +133,7 @@ def config():
             for row in result:
                 logid, timestamp, name = row
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
-            input("\nPress ctrl-c to continue:")
+            input("\nPress Enter to continue:")
         except KeyboardInterrupt:
             return 0
     elif x == "7":
