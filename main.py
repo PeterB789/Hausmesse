@@ -127,13 +127,13 @@ def config():
             for row in result:
                 userid, rfid, name, aktiv = row
                 print("{:<10}{:<15}{:<25}{:^10}".format(userid, rfid, name, aktiv))
+            input("\nPress Enter to continue:")
         except KeyboardInterrupt:
             return 0
-        except:
-            print("\nDatenbank-Probleme")
+        except Exception as error:
+            print("\n"+error)
             sleep(1)
             return 0
-        input("\nPress Enter to continue:")
     elif x == "6":
         try:
             clear_console()
@@ -146,11 +146,13 @@ def config():
             for row in result:
                 logid, timestamp, name = row
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
-        except:
-            print("\nDatenbank-Probleme")
+            input("\nPress Enter to continue:")
+        except KeyboardInterrupt:
+            return 0
+        except Exception as error:
+            print("\n"+error)
             sleep(1)
             return 0
-        input("\nPress Enter to continue:")
     elif x == "7":
         clear_console()
         return(True)
@@ -186,7 +188,7 @@ if __name__ == "__main__":
             try:
                 while run == True:
                     clear_console()
-                    print("### RFID-Module ###\nCtrl-C for Config-Mode\n")
+                    print("  ### RFID-Module ###\n\nCtrl-C for Config-Mode\n")
                     open_door(db_module.db_check(reader()))
                 while run == False:
                     run = config()
@@ -196,6 +198,7 @@ if __name__ == "__main__":
                 if run == True:
                     run = False
                 else:
+                    print("Bye\n")
                     break
         except Exception as error:
             print(error)
