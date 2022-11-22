@@ -127,7 +127,7 @@ def config():
             for row in result:
                 userid, rfid, name, aktiv = row
                 print("{:<10}{:<15}{:<25}{:^10}".format(userid, rfid, name, aktiv))
-            input("\nPress Enter to continue:")
+            input("\nPress ctrl-c to continue:")
         except KeyboardInterrupt:
             return 0
         except Exception as error:
@@ -146,7 +146,7 @@ def config():
             for row in result:
                 logid, timestamp, name = row
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
-            input("\nPress Enter to continue:")
+            input("\nPress ctrl-c to continue:")
         except KeyboardInterrupt:
             return 0
         except Exception as error:
