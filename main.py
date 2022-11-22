@@ -69,10 +69,6 @@ def config():
                     break
         except KeyboardInterrupt:
             return 0
-        except:
-            print("\nCanceled or database-issues")
-            sleep(1)
-            return 0
     elif x == "2":
         try:
             clear_console()
@@ -81,10 +77,6 @@ def config():
             db_module.db_delete_user(f'{userid}')
         except KeyboardInterrupt:
             return 0
-        except:
-            print("\nCanceled or database-issues")
-            sleep(1)
-            return 0
     elif x == "3":
         try:
             clear_console()
@@ -92,10 +84,6 @@ def config():
             userid = input("Bitte \"User-ID\" eingeben: ")
             db_module.db_de_or_activate_user(f'{userid}')
         except KeyboardInterrupt:
-            return 0
-        except:
-            print("\nCanceled or database-issues")
-            sleep(1)
             return 0
     elif x == "4":
         clear_console()
@@ -128,10 +116,6 @@ def config():
             input("\nPress ctrl-c to continue:")
         except KeyboardInterrupt:
             return 0
-        except Exception as error:
-            print("\n"+error)
-            sleep(1)
-            return 0
     elif x == "6":
         try:
             clear_console()
@@ -146,10 +130,6 @@ def config():
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
             input("\nPress ctrl-c to continue:")
         except KeyboardInterrupt:
-            return 0
-        except Exception as error:
-            print("\n"+error)
-            sleep(1)
             return 0
     elif x == "7":
         clear_console()
