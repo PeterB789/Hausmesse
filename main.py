@@ -127,13 +127,13 @@ def config():
             for row in result:
                 userid, rfid, name, aktiv = row
                 print("{:<10}{:<15}{:<25}{:^10}".format(userid, rfid, name, aktiv))
-        input("\nPress Enter to continue:")
         except KeyboardInterrupt:
             return 0
         except:
             print("\nDatenbank-Probleme")
             sleep(1)
             return 0
+        input("\nPress Enter to continue:")
     elif x == "6":
         try:
             clear_console()
@@ -146,11 +146,11 @@ def config():
             for row in result:
                 logid, timestamp, name = row
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
-        input("\nPress Enter to continue:")
         except:
             print("\nDatenbank-Probleme")
             sleep(1)
             return 0
+        input("\nPress Enter to continue:")
     elif x == "7":
         clear_console()
         return(True)
