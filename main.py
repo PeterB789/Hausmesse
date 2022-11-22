@@ -9,10 +9,8 @@ mfrc = SimpleMFRC522()
 
 def reader():
     print("Chip vorhalten:")
-    try:
-        rfid, text = mfrc.read()
-    finally:
-        return rfid
+    rfid, text = mfrc.read()
+    return rfid
 
 
 def writer(text):
