@@ -175,7 +175,7 @@ if __name__ == "__main__":
             try:
                 while run == True:
                     clear_console()
-                    print("### RFID-Reader module ###\n\nctrl-c for config-mode\n")
+                    print("### RFID-Reader module ###\n\n##ctrl-c for config-mode##\n")
                     open_door(db_module.db_check(reader()))
                 while run == False:
                     run = config()
