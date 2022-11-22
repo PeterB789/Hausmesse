@@ -105,9 +105,7 @@ def config():
         print("### Chip auslesen ###\n")
         try:
             rfid = reader()
-        except Exception as error:
-            print(error)
-            sleep(2)
+        except KeyboardInterrupt:
             return 0
         try:
             userid = db_module.db_get_user_id(rfid)
