@@ -8,7 +8,6 @@ def reader():
     try:
         rfid, text = mfrc.read()
     finally:
-        GPIO.cleanup()
         return rfid
 
 
