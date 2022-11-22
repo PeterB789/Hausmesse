@@ -51,5 +51,6 @@ if __name__ == "__main__":
             rfid = reader()
             open_door(db_module.db_check(rfid))
         except Exception as error:
-            GPIO.cleanup()
             print(error)
+        finally:
+            exit(0)
