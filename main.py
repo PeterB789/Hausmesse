@@ -198,7 +198,7 @@ if __name__ == "__main__":
                 if run == True:
                     run = False
                 else:
-                    print("Bye\n")
+                    print("\nBye\n")
                     break
         except Exception as error:
             print(error)
