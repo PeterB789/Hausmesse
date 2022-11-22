@@ -96,7 +96,7 @@ def config():
         except KeyboardInterrupt:
             return 0
         except:
-            print("\nDatenbank-Probleme")
+            print("\nCanceled or database-issues")
             sleep(1)
             return 0
     elif x == "4":
@@ -105,7 +105,7 @@ def config():
         try:
             rfid = reader()
         except:
-            print("Reader offline")
+            print("\nCanceled or reader offline")
             sleep(1)
             return 0
         try:
@@ -188,7 +188,7 @@ if __name__ == "__main__":
             try:
                 while run == True:
                     clear_console()
-                    print("  ### RFID-Module ###\n\nCtrl-C for Config-Mode\n")
+                    print("### RFID-Module ###\n\nCtrl-c for config-mode\n")
                     open_door(db_module.db_check(reader()))
                 while run == False:
                     run = config()
