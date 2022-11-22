@@ -11,6 +11,9 @@ def reader():
     print("Chip vorhalten:")
     try:
         rfid, text = mfrc.read()
+    except KeyboardInterrupt:
+        GPIO.cleanup()
+        break
     finally:
         GPIO.cleanup()
         return rfid
@@ -54,6 +57,7 @@ if __name__ == "__main__":
             clear_console()
             rfid = reader()
             open_door(db_module.db_check(rfid))
+            GPIO.cleanup()
         except Exception as error:
             GPIO.cleanup()
             print(error)
