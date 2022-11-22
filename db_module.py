@@ -46,9 +46,14 @@ def db_add_user(name, rfid):
 def db_get_username(id):
     sql = f"SELECT name FROM users WHERE user_id = {id};"
     my_cursor.execute(sql)
-    result = my_cursor.fetchall()
-    return result[0][0]
+    username = my_cursor.fetchall()
+    return username[0][0]
 
+def db_get_user_id(rfid):
+    sql = f"SELECT user_id FROM users WHERE rfid = {rfid};"
+    my_cursor.execute(sql)
+    user_id = my_cursor.fetchall()
+    return user_id[0][0]
 
 def db_delete_user(id):
     if db_userid_check(id):

@@ -1,48 +1,6 @@
 from time import sleep
-import db_module
-import RPi.GPIO as GPIO
-from mfrc522 import SimpleMFRC522
-
+#import db_module
 clear_console = lambda: print('\n' * 150)
-mfrc = SimpleMFRC522()
-
-
-def reader():
-    print("Chip vorhalten:")
-    try:
-        rfid, text = mfrc.read()
-    finally:
-        return rfid
-
-
-def writer(text):
-    try:
-        mfrc.write(text)
-        print("Chip registriert!")
-        sleep(1)
-    finally:
-        return True
-
-green_led = 3
-relais = 5
-GPIO.setup(green_led, GPIO.OUT)
-GPIO.setup(relais, GPIO.OUT)
-
-
-def open_door(authorized):
-    if authorized:
-        print("Sesam öffne dich!")
-        GPIO.output(green_led, True)
-        GPIO.output(relais, True)
-        sleep(3)
-        GPIO.output(green_led, False)
-        GPIO.output(relais, False)
-        # relais schalten + grüne LED
-        # debug:
-    else:
-        # debug:
-        print("Zugang verweigert!")
-        sleep(2)
 
 def config():
     clear_console()
@@ -165,22 +123,6 @@ def config():
         print("Keine korrekte Auswahl. \nBitte erneut versuchen.")
         sleep(1)
 
-#if __name__ == "__main__":
-#    run = 1
-#    try:
-#        try:
-#            while run == 1:
-#                clear_console()
-#                open_door(db_module.db_check(reader()))
-#        except KeyboardInterrupt:
-#            run = 2
-#            raise
-#    except Exception as error:
-#        print(error)
-#    finally:
-#        GPIO.cleanup()
-#        exit(0)
-
 if __name__ == "__main__":
     run = True
     while True:
@@ -200,9 +142,3 @@ if __name__ == "__main__":
                     break
         except Exception as error:
             print(error)
-
-
-#to do:
-# config mit main combine
-# chip auslesen rfid = user?
-# logs - max angeben
