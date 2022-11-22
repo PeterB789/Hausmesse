@@ -47,7 +47,7 @@ def open_door(authorized):
 if __name__ == "__main__":
     try:
         while True:
-            #clear_console()
+            clear_console()
             open_door(db_module.db_check(reader()))
     except Exception as error:
         print(error)
