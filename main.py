@@ -11,6 +11,7 @@ def reader():
     print("Chip vorhalten:")
     try:
         rfid, text = mfrc.read()
+    finally:
         return rfid
 
 
@@ -19,7 +20,8 @@ def writer(text):
         mfrc.write(text)
         print("Chip registriert!")
         sleep(1)
-
+    finally:
+        return True
 
 green_led = 3
 relais = 5
