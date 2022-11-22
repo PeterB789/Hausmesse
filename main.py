@@ -5,7 +5,10 @@ from mfrc522 import SimpleMFRC522
 
 clear_console = lambda: print('\n' * 150)
 mfrc = SimpleMFRC522()
-
+green_led = 3
+relais = 5
+GPIO.setup(green_led, GPIO.OUT)
+GPIO.setup(relais, GPIO.OUT)
 
 def reader():
     print("Scan RFID-Chip:")
@@ -20,11 +23,6 @@ def writer(text):
         sleep(1)
     finally:
         return True
-
-green_led = 3
-relais = 5
-GPIO.setup(green_led, GPIO.OUT)
-GPIO.setup(relais, GPIO.OUT)
 
 
 def open_door(authorized):
@@ -165,21 +163,6 @@ def config():
         print("Keine korrekte Auswahl. \nBitte erneut versuchen.")
         sleep(1)
 
-#if __name__ == "__main__":
-#    run = 1
-#    try:
-#        try:
-#            while run == 1:
-#                clear_console()
-#                open_door(db_module.db_check(reader()))
-#        except KeyboardInterrupt:
-#            run = 2
-#            raise
-#    except Exception as error:
-#        print(error)
-#    finally:
-#        GPIO.cleanup()
-#        exit(0)
 
 if __name__ == "__main__":
     run = True
@@ -199,13 +182,11 @@ if __name__ == "__main__":
                     run = False
                 else:
                     clear_console()
-                    print("\nBye\n")
+                    print("\nBye...\n")
                     break
         except Exception as error:
             print(error)
 
 
 #to do:
-# config mit main combine
-# chip auslesen rfid = user?
-# logs - max angeben
+# logs - max (standard 30) angeben

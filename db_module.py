@@ -32,14 +32,14 @@ def db_add_user(name, rfid):
         sql = f'INSERT INTO users (rfid, name) VALUES ({rfid}, \'{name}\');'
         my_cursor.execute(sql)
         my_db.commit()
-        print("User", name, "angelegt.")
+        print("User", name, "registered.")
         sleep(2)
         return True
     elif len(user_result) > 0 and user_result[0][0] == name:
-        print("Benutzer", name, "ist schon in der Datenbank vorhanden!")
+        print("User", name, "already in database registered.")
         sleep(2)
     elif len(rfid_result) > 0 and rfid_result[0][0] == rfid:
-        print("RFID schon in der Datenbank registriert!")
+        print("RFID already in database registered.")
         sleep(2)
 
 
@@ -64,7 +64,7 @@ def db_delete_user(id):
         sql = f'DELETE FROM users WHERE user_id = {id};'
         my_cursor.execute(sql)
         my_db.commit()
-        print("User", f'"{name}"', "ID:", id, "gelöscht.")
+        print("User", f'"{name}"', "ID:", id, "deleted.")
         sleep(2)
 
 
@@ -72,7 +72,7 @@ def db_userid_check(id):
     my_cursor.execute(f'SELECT user_id FROM users WHERE user_id={id};')
     result = my_cursor.fetchall()
     if len(result) == 0:
-        print("UserID nicht vorhanden")
+        print("UserID not in database")
         sleep(2)
         return False
     else:
@@ -87,12 +87,12 @@ def db_de_or_activate_user(id):
         if result[0][0] == 1:
             my_cursor.execute(f'UPDATE users SET active=0 WHERE user_id={id};')
             my_db.commit()
-            print("User", f'"{name}"', "User-ID:", id, "deaktiviert.")
+            print("User", f'"{name}"', "User-ID:", id, "deactivated.")
             sleep(2)
         elif result[0][0] == 0:
             my_cursor.execute(f'UPDATE users SET active=1 WHERE user_id={id};')
             my_db.commit()
-            print("User", f'"{name}"', "User-ID:", id, "aktiviert.")
+            print("User", f'"{name}"', "User-ID:", id, "activated.")
             sleep(2)
 
 
@@ -109,9 +109,9 @@ def db_check(rfid):
             print("User not authorized!")
             sleep(2)
         else:
-            print("Willkommen ", db_get_username(user_id))
+            print("Welcome ", db_get_username(user_id))
             write_log(user_id)
             return True
     else:
-        print("Access denied")
+        print("### Access denied ###")
         sleep(2)
