@@ -52,7 +52,7 @@ if __name__ == "__main__":
             while run == 1:
                 clear_console()
                 open_door(db_module.db_check(reader()))
-        except KeyboardInterupt:
+        except KeyboardInterrupt:
             run = 2
             raise
     except Exception as error:
