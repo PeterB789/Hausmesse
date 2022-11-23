@@ -1,7 +1,7 @@
 CREATE DATABASE rfid;
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
-    rfid INT UNIQUE,
+    rfid BIGINT UNIQUE,
     name VARCHAR(80),
     active TINYINT(1) DEFAULT 1
     );
