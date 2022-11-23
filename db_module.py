@@ -38,9 +38,11 @@ def db_add_user(name, rfid):
     elif len(user_result) > 0 and user_result[0][0] == name:
         print("User", name, "already in database registered.")
         sleep(2)
+        return False
     elif len(rfid_result) > 0 and rfid_result[0][0] == rfid:
         print("RFID already in database registered.")
         sleep(2)
+        return False
 
 
 def db_get_username(id):

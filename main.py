@@ -66,8 +66,9 @@ def config():
                 user_name = input("Bitte \"vorname_name\" eingeben: ").lower()
                 rfid = int(reader())
                 if db_module.db_add_user(user_name,rfid):
-                    break
-                return 0
+                    return 0
+                else:
+                    pass
         except KeyboardInterrupt:
             return 0
         except Exception as error:
