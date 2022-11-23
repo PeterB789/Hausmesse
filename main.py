@@ -12,8 +12,8 @@ GPIO.setup(relais, GPIO.OUT)
 
 def reader():
     print("Scan RFID-Chip:")
-    rfid, text = mfrc.read()
-    return rfid
+    scan_data = mfrc.read()
+    return scan_data[0]
 
 
 def writer(text):
