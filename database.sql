@@ -1,3 +1,11 @@
+Entity-Relationship:
+*PK, /FK
+
+users:  *user_id, rfid, name, active
+logs:   *log_id, time_stamp, /user_id
+
+
+
 CREATE DATABASE rfid;
 CREATE TABLE users (
     user_id INT PRIMARY KEY AUTO_INCREMENT,
@@ -10,7 +18,6 @@ CREATE TABLE logs (
     log_id INT PRIMARY KEY AUTO_INCREMENT,
     time_stamp TIMESTAMP,
     user_id INT REFERENCES users(user_id),
-    authorized TINYINT(1) DEFAULT 1
     );
 
 INSERT INTO users (rfid,name) VALUES (12345678,'peter_bischofberger');

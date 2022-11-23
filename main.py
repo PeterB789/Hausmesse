@@ -19,7 +19,7 @@ def reader():
 def writer(text):
     try:
         mfrc.write(text)
-        print("Chip registriert!")
+        print("### writing on Chip ... ###")
         sleep(1)
     finally:
         return True
@@ -27,18 +27,16 @@ def writer(text):
 
 def open_door(authorized):
     if authorized:
-        print("Door open")
+        print("### Door open ###")
         GPIO.output(green_led, True)
         GPIO.output(relais, True)
         sleep(3)
         GPIO.output(green_led, False)
         GPIO.output(relais, False)
-        # relais schalten + grüne LED
-        # debug:
     else:
-        # debug:
-        print("Access denied")
+        print("### Access denied ###")
         sleep(2)
+
 
 def config():
     clear_console()
@@ -167,6 +165,7 @@ def config():
         clear_console()
         print("Keine korrekte Auswahl. \nBitte erneut versuchen.")
         sleep(1)
+        return 0
 
 
 if __name__ == "__main__":
