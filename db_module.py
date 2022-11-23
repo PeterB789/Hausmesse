@@ -107,13 +107,12 @@ def db_check(rfid):
         sql = f'SELECT name,active FROM users WHERE user_id = {user_id};'
         my_cursor.execute(sql)
         result = my_cursor.fetchall()
-        if result[0][1] == 0:
-            print("User not authorized!")
-            sleep(2)
-        else:
+        if result[0][1] == 1:
             print("Welcome ", db_get_username(user_id))
             write_log(user_id)
             return True
+        else:
+            print("User not authorized!")
+            sleep(2)
     else:
-        print("### Access denied ###")
-        sleep(2)
+        return False

@@ -195,3 +195,5 @@ if __name__ == "__main__":
 
 #to do:
 # logs - max (standard 30) angeben
+# LEDs Feedback evtl erweitern
+# User-Abfrage Tabell verschönern
