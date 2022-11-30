@@ -32,3 +32,8 @@ SELECT log_id,time_stamp,name AS Username,authorized AS 'Authorized 0=NO 1=YES' 
 
 mysql -u root -ptest -D rfid -e "SELECT log_id,time_stamp,name AS Username FROM logs JOIN users ON logs.user_id=users.user_id WHERE log_id>(SELECT MAX(log_id) FROM logs)-10 ORDER BY time_stamp DESC;"
 mysql -u root -ptest -D rfid -e "SELECT * FROM users;"
+
+
+mysql -h mysql2ffb.netcup.net
+user:   k99199_rfid-admin
+pw:     kkTf709!7

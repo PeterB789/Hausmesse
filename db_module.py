@@ -26,8 +26,6 @@ def db_single_select(column, value):
 def db_add_user(name, rfid):
     user_result = db_single_select('name', f'\'{name}\'')
     rfid_result = db_single_select('rfid', rfid)
-    #print("user:", user_result)
-    #print("rfid:", rfid_result)
     if len(user_result) == 0 and len(rfid_result) == 0:
         sql = f'INSERT INTO users (rfid, name) VALUES ({rfid}, \'{name}\');'
         my_cursor.execute(sql)
