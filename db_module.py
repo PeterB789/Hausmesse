@@ -1,6 +1,7 @@
 import mysql.connector
 from time import sleep
 
+#mysql library --> Credentials um Datenbank zu verbinden
 my_db = mysql.connector.connect(
     host="localhost",
     user="root",
@@ -8,14 +9,14 @@ my_db = mysql.connector.connect(
     database="rfid")
 my_cursor = my_db.cursor()
 
-
+# Log anlegen - Input:user_id
 def write_log(user_id):
     sql = f'INSERT INTO logs (time_stamp,user_id) \
             VALUES (CURRENT_TIMESTAMP, {user_id});'
     my_cursor.execute(sql)
     my_db.commit()
 
-
+# Log anlegen - Input:user_id
 def db_single_select(column, value):
     sql = f'SELECT {column} FROM users WHERE {column} = {value};'
     my_cursor.execute(sql)

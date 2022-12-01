@@ -10,13 +10,14 @@ relais = 5
 GPIO.setup(green_led, GPIO.OUT)
 GPIO.setup(relais, GPIO.OUT)
 
-def reader():
+#RFID-Tag ID einlesen
+def reader(): 
     print("Scan RFID-Chip:")
     scan_data = mfrc.read()
-    return scan_data[0]
+    return scan_data[0] #1. Speicherplatz ist die ID
 
-
-def writer(text):
+#wird (noch) nicht benutzt im Programm
+def writer(text): 
     try:
         mfrc.write(text)
         print("### writing on Chip ... ###")
@@ -24,8 +25,8 @@ def writer(text):
     finally:
         return True
 
-
-def open_door(authorized):
+# Falls authorized==True wird das Relais/Led aktiviert
+def open_door(authorized): 
     if authorized:
         print("### Door open ###")
         GPIO.output(green_led, True)
@@ -38,6 +39,11 @@ def open_door(authorized):
         sleep(2)
 
 
+"""
+Konfigurationsmenü:
+Hier können die User administriert werden.
+Über (7) kommt man zurück zum Tag-Reader-Modus.
+"""
 def config():
     clear_console()
     x = input(
@@ -51,6 +57,7 @@ def config():
         (5) User anzeigen
         (6) Logs anzeigen
         (7) Exit config
+
         (8) Quit
 
         Bitte Nummer eingeben:
@@ -58,7 +65,7 @@ def config():
     )
     if x == "1":
         try:
-            while True:
+            while True: #User anlegen mit Username und RFID
                 clear_console()
                 print("### User anlegen ###\n")
                 user_name = input("Bitte \"vorname_name\" eingeben: ").lower()
@@ -74,7 +81,7 @@ def config():
             sleep(2)
             return 0
     elif x == "2":
-        try:
+        try:    # User wird gelöscht über UserID
             clear_console()
             print("### User löschen ###\n(logs werden auch gelöscht)\n")
             userid = input("Bitte \"User-ID\" eingeben: ")
@@ -87,7 +94,7 @@ def config():
             sleep(2)
             return 0
     elif x == "3":
-        try:
+        try:    #User wird aktiviert oder deaktiviert - je nach Zustand
             clear_console()
             print("### User de-/aktivieren ###\n")
             userid = input("Bitte \"User-ID\" eingeben: ")
@@ -100,7 +107,7 @@ def config():
             sleep(2)
             return 0
     elif x == "4":
-        clear_console()
+        clear_console() #Chip wird ausgelesen und abgeglichen mit Datenbank
         print("### Chip auslesen ###\n")
         try:
             rfid = reader()
@@ -117,7 +124,7 @@ def config():
         input("\nPress Enter to continue:")
         return 0
     elif x == "5":
-        try:
+        try:    #SQL-Select des 'users-table' und print.format auf Konsole
             clear_console()
             sql = f'SELECT user_id,rfid,name,active FROM users;'
             db_module.my_cursor.execute(sql)
@@ -135,7 +142,7 @@ def config():
             sleep(2)
             return 0
     elif x == "6":
-        try:
+        try:    #SQL-Select des 'logs-table' und print.format auf Konsole
             clear_console()
             sql = f'SELECT log_id,time_stamp,name FROM logs JOIN users ON logs.user_id=users.user_id \
                     WHERE log_id>(SELECT MAX(log_id) FROM logs)-40 ORDER BY time_stamp DESC;'
@@ -146,6 +153,7 @@ def config():
             for row in result:
                 logid, timestamp, name = row
                 print("{:<10}{:<25}{:%Y-%m-%d %H:%M:%S}".format(logid, name, timestamp))
+                #timestamp kommt als Objekt von SQL und muss formatiert werden
             input("\nPress Enter to continue:")
             return 0
         except KeyboardInterrupt:
@@ -156,27 +164,32 @@ def config():
             return 0
     elif x == "7":
         clear_console()
-        return(True)
+        return(True)    #gibt True an die Mainschleife zurück --> Reader-Modus
     elif x == "8":
         clear_console()
-        print("\nBye...")
+        print("\nBye...")   #Programm beenden
         exit(0)
     else:
-        clear_console()
+        clear_console() #Menü-Eingabe inkorrekt
         print("Keine korrekte Auswahl. \nBitte erneut versuchen.")
         sleep(1)
         return 0
 
-
+"""
+Mainschleife:
+Über ctrl-c kommt man in das Konfigurations-Menü respektive beendet das Programm.
+Realisiert über Exceptions und die 'run'-Variable.
+"""
 if __name__ == "__main__":
     run = True
     while True:
         try:
-            try:
+            try:    #Mainschleife mit "Exit"-Option um ins Config-Menü zu kommen
                 while run == True:
                     clear_console()
                     print("### RFID-Reader module ###\n\n##ctrl-c for config-mode##\n")
-                    open_door(db_module.db_check(reader()))
+                    #Hauptfunktion --> Authorisierung
+                    open_door(db_module.db_check(reader())) 
                 while run == False:
                     run = config()
                     if run == True:
@@ -190,9 +203,3 @@ if __name__ == "__main__":
                     break
         except Exception as error:
             print(error)
-
-
-#to do:
-# logs - max (standard 30) angeben
-# LEDs Feedback evtl erweitern
-# User-Abfrage Tabell verschönern
