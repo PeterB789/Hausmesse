@@ -16,14 +16,14 @@ def write_log(user_id):
     my_cursor.execute(sql)
     my_db.commit()
 
-# Log anlegen - Input:user_id
+# SQL-Select - Input:column, value return: [SQL-Ergebnis]
 def db_single_select(column, value):
     sql = f'SELECT {column} FROM users WHERE {column} = {value};'
     my_cursor.execute(sql)
     select = my_cursor.fetchall()
     return select
 
-
+# User anlegen - if Username+ID noch nicht in Datenbank return True; else False
 def db_add_user(name, rfid):
     user_result = db_single_select('name', f'\'{name}\'')
     rfid_result = db_single_select('rfid', rfid)
@@ -43,21 +43,21 @@ def db_add_user(name, rfid):
         sleep(2)
         return False
 
-
+# Abfrage des usernames - input: userid return: username
 def db_get_username(id):
     sql = f"SELECT name FROM users WHERE user_id = {id};"
     my_cursor.execute(sql)
     username = my_cursor.fetchall()
     return username[0][0]
 
-
+# Abfrage der userid - input: rfid return: user_id
 def db_get_user_id(rfid):
     sql = f"SELECT user_id FROM users WHERE rfid = {rfid};"
     my_cursor.execute(sql)
     user_id = my_cursor.fetchall()
     return user_id[0][0]
 
-
+# User löschen - aus users und alle zugehörigen logs, sonst Integrity fail
 def db_delete_user(id):
     if db_userid_check(id):
         name = db_get_username(id)
@@ -70,7 +70,7 @@ def db_delete_user(id):
         print("User", f'"{name}"', "ID:", id, "deleted.")
         sleep(2)
 
-
+# User-exists check input user_id return: Bool
 def db_userid_check(id):
     my_cursor.execute(f'SELECT user_id FROM users WHERE user_id={id};')
     result = my_cursor.fetchall()
@@ -81,7 +81,7 @@ def db_userid_check(id):
     else:
         return True
 
-
+# User aktivieren/deactivieren input: user_id
 def db_de_or_activate_user(id):
     if db_userid_check(id):
         name = db_get_username(id)
@@ -98,17 +98,17 @@ def db_de_or_activate_user(id):
             print("User", f'"{name}"', "User-ID:", id, "activated.")
             sleep(2)
 
-
+# User Authorisierung Input: RFID Output: Bool
 def db_check(rfid):
     sql = f'SELECT user_id FROM users WHERE rfid={rfid};'
     my_cursor.execute(sql)
     result = my_cursor.fetchall()
-    if len(result) == 1:
+    if len(result) == 1: # länge==1 heisst, dass der User in der DB vorhanden
         user_id = result[0][0]
         sql = f'SELECT name,active FROM users WHERE user_id = {user_id};'
         my_cursor.execute(sql)
         result = my_cursor.fetchall()
-        if result[0][1] == 1:
+        if result[0][1] == 1: # check ob aktiv oder nicht
             print("Welcome ", db_get_username(user_id))
             write_log(user_id)
             return True

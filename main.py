@@ -188,14 +188,14 @@ if __name__ == "__main__":
                 while run == True:
                     clear_console()
                     print("### RFID-Reader module ###\n\n##ctrl-c for config-mode##\n")
-                    #Hauptfunktion --> Authorisierung
+                    #Hauptfunktion Reader --> Authorisierung --> Relais/LED aktivieren
                     open_door(db_module.db_check(reader())) 
                 while run == False:
-                    run = config()
+                    run = config() #Kofigurationsmenü
                     if run == True:
                         break
             except KeyboardInterrupt:
-                if run == True:
+                if run == True: #mit ctl-c kommt man ins Kofig-menü
                     run = False
                 else:
                     clear_console()
